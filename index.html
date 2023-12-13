@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <style>
+    body{
+        background-color: bisque;
+    }
+    h1{
+        text-align: center;
+    }
+    .circle {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      cursor: move;
+    }
+    .mouse{
+        width: 150px;
+        height: 150px;
+        text-align: center;        
+        border: 2px solid black;
+        position: absolute;
+        left: 100px;
+        top: 150px;
+    }
+    .lion{
+        width: 150px;
+        height: 150px;
+        text-align: center;        
+        border: 2px solid black;
+        position: absolute;
+        left: 300px;
+        top: 150px;
+    }
+    .wolf{
+        width: 150px;
+        height: 150px;
+        text-align: center;        
+        border: 2px solid black;
+        position: absolute;
+        left: 500px;
+        top: 150px;
+    }
+    .kalabaro{
+        width: 150px;
+        height: 150px;
+        text-align: center;        
+        border: 2px solid black;
+        position: absolute;
+        left: 700px;
+        top: 150px;
+    }
+    .dinosour{
+        width: 150px;
+        height: 150px;
+        text-align: center;        
+        border: 2px solid black;
+        position: absolute;
+        left: 900px;
+        top: 150px;
+    }
+    #small {
+     
+        position: absolute;
+
+      left: 100px;
+      top: 400px;
+      width: 10px;
+      height: 10px;
+      
+    }
+    #wold{
+        position: absolute;
+      left: 500px;
+      top: 400px;
+      width: 10px;
+      height: 10px;
+    }
+    #kalabaro{
+        position: absolute;
+      left: 700px;
+      top: 400px;
+      width: 10px;
+      height: 10px;
+    }
+    #barney{
+        position: absolute;
+      left: 900px;
+      top: 400px;
+      width: 10px;
+      height: 10px;
+    }
+    #large {
+      
+      position: absolute;
+      left: 300px;
+      top: 400px;
+      width: 10px;
+      height: 10px;
+    }
+    img{
+        width: 110px;
+        height: 110px;
+    }
+ </style>
+</head>
+<body>
+    <h1>DRAG AND DROP GAME</h1>
+ <div id="large" class="circle"><img src="ant.jpg" alt=""></div>
+ <div id="small" class="circle"><img src="horse.jpg" alt=""></div>
+ <div id="wold" class="circle"><img src="parot.jpg" alt=""></div>
+ <div id="kalabaro" class="circle"><img src="dragon.jpg" alt=""></div>
+ <div id="barney" class="circle"><img src="cat.jpg" alt=""></div>
+ <div class="mouse">ant</div>
+ <div  class="lion">dragon</div>
+ <div class="wolf">parot</div>
+ <div class="kalabaro">horse</div>
+ <div class="dinosour">cat</div>
+ 
+ <script>
+    //Make the DIV element draggable:
+dragElement(document.getElementById("large"));
+dragElement(document.getElementById("small"));
+dragElement(document.getElementById("wold"));
+dragElement(document.getElementById("kalabaro"));
+dragElement(document.getElementById("barney"));
+
+function dragElement(elmnt) {
+ var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+ if (document.getElementById(elmnt.id + "header")) {
+    // if present, the header is where you move the DIV from:
+    document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
+ } else {
+    // otherwise, move the DIV from anywhere inside the DIV:
+    elmnt.onmousedown = dragMouseDown;
+ }
+
+ function dragMouseDown(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // get the mouse cursor position at startup:
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    document.onmouseup = closeDragElement;
+    // call a function whenever the cursor moves:
+    document.onmousemove = elementDrag;
+ }
+
+ function elementDrag(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // calculate the new cursor position:
+    pos1 = pos3 - e.clientX;
+    pos2 = pos4 - e.clientY;
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    // set the element's new position:
+    elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+    elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+ }
+
+ function closeDragElement() {
+    // stop moving when mouse button is released:
+    document.onmouseup = null;
+    document.onmousemove = null;
+ }
+}
+ </script>
+</body>
+</html>
